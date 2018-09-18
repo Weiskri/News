@@ -1,0 +1,55 @@
+from bs4 import BeautifulSoup
+import requests
+import re
+import filecmp
+
+url = "https://news.ycombinator.com/"
+response = requests.get(url)
+
+soup = BeautifulSoup(response.content, "html.parser")
+
+soup.prettify()
+
+news = []
+
+for a in soup.find_all("a", class_="storylink"):
+    headlines = a.text
+    split = headlines.split('\n')
+    stringify = str(split)
+    news.append(stringify)
+
+for i in sorted(news, key=len):
+    print(str(i)[2:-2])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
