@@ -8,18 +8,28 @@ response = requests.get(url)
 
 soup = BeautifulSoup(response.content, "html.parser")
 
+# makes the page navigable
 soup.prettify()
 
 news = []
 
+# gets the text in the anchor tags with class name storylink and adds to array
 for a in soup.find_all("a", class_="storylink"):
     headlines = a.text
     split = headlines.split('\n')
     stringify = str(split)
     news.append(stringify)
 
+# tells compiler that i is a string and sorts the array by length of each title
 for i in sorted(news, key=len):
     print(str(i)[2:-2])
+
+# fixes newline issue
+with open(filename, "w") as text_file:
+    text_file.write(str(textString))
+    text_file.write('\n\n')
+
+os.rename(fileMigPath, fileDestPath)
 
 
 
